@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tenant-accounts-management' => [
+/*    'tenant-accounts-management' => [
         'audience' => 'tenant',
         'icon' => 'fa fa-user-cap',
         'dashboard' => 'all',
@@ -24,5 +24,5 @@ return [
                 'order' => 0,
             ],
         ],
-    ],
+    ],*/
 ];

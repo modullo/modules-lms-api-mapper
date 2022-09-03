@@ -1,6 +1,6 @@
 <?php
 
-namespace Modullo\ModulesLmsBaseAccounts\Http\Requests;
+namespace Modullo\ModulesLmsApiMapper\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -16,15 +16,28 @@ use Modullo\ModulesLmsApiMapper\Services\ModulesLmsApiMapperService;
 class ModulesLmsApiMapperController extends Controller
 {
     protected Sdk $sdk;
-    protected $accountService;
+    protected $apiMapperService;
     public function __construct(Sdk $sdk)
     {
         $this->sdk = $sdk;
-        $this->accountService = new ModulesLmsApiMapperService();
+        $this->apiMapperService = new ModulesLmsApiMapperService();
     }
 
     public function index(Sdk $sdk)
     {
-        return view('modules-lms-api-mapper::tenants.index');
+        $maps = $this->apiMapperService->allMaps();
+        $mapsData = $this->apiMapperService->allMapsData();
+        return view('modules-lms-api-mapper::tenants.index',compact('maps','mapsData'));
+    }
+
+    public function store(Request $request)
+    {
+        $updateTypes = $this->apiMapperService->getUpdateTypes();
+        $request->validate([
+            'update-type' => ['required','string','in:'.$updateTypes]
+        ]);
+
+        $this->apiMapperService->updateMap($request->query('update-type'),$request->except('update-type'));
+        return response()->json(['message'=>'Map successfully updated'],200);
     }
 }

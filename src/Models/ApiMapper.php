@@ -1,12 +1,13 @@
 <?php
 namespace Modullo\ModulesLmsApiMapper\Models;
 
+use App\Traits\UUIDTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ApiMapper extends Model
 {
-    use HasFactory;
+    use HasFactory,UUIDTrait;
 
     protected $guarded = [];
 

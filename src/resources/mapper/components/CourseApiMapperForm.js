@@ -1,9 +1,9 @@
-Vue.component("user-api-mapper-form", {
+Vue.component("course-api-mapper-form", {
     props: {
-        usersMap: {
+        coursesMap: {
             default: () => [],
         },
-        usersMapData: {
+        coursesMapData: {
             default: () => [],
         },
     },
@@ -11,7 +11,7 @@ Vue.component("user-api-mapper-form", {
         <div class="container">
             <form class="form" @submit.prevent="validateBeforeSubmit">
                 <div class="form-row">
-                    <div class="form-group col-lg-6" v-for="(map,mapKey) in usersMap" v-if="map.visible">
+                    <div class="form-group col-lg-6" v-for="(map,mapKey) in coursesMap" v-if="map.visible">
                         <label for="name">{{map.label}}</label>
                         <p class="control has-icon has-icon-right">
                             <input :name="mapKey" class="form-control" v-model="form[mapKey]" v-validate="'required'" :class="{'input': true }" type="text" :placeholder="map.placeholder">
@@ -26,11 +26,11 @@ Vue.component("user-api-mapper-form", {
       `,
     data() {
         return {
-            form: this.usersMapData,
+            form: this.coursesMapData,
         };
     },
     mounted() {
-        console.log(this.usersMapData)
+        console.log(this.coursesMapData)
     },
     watch: {
         form: function(newVal, oldVal) {
@@ -42,10 +42,10 @@ Vue.component("user-api-mapper-form", {
             console.log(this.form)
             let loader = Vue.$loading.show()
             //updae-type below must be one of the model keys in the mapper config file
-            axios.post(`/tenant/api-mapper?update-type=user`, this.form).then(res => {
+            axios.post(`/tenant/api-mapper?update-type=course`, this.form).then(res => {
                 // ev.target.reset()
                 console.log(res.data)
-                this.$emit('update-user-map',this.form)
+                this.$emit('update-course-map',this.form)
                 loader.hide();
                 toastr["success"](res.data.message)
             }).catch(e => {
